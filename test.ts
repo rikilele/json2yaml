@@ -37,6 +37,12 @@ Deno.test('a simple array', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
+Deno.test('a simple object', () => {
+  const input = {hello: 'world'};
+  const expected = "hello: world\n";
+  assertEquals(json2yaml(JSON.stringify(input)), expected);
+});
+
 Deno.test('ambiguous strings', () => {
   const input = [true, 'true', false, 'false', null, 'null', 1.0, '1.0'];
   const expected = "- true\n- 'true'\n- false\n- 'false'\n- null\n- 'null'\n- 1\n- '1.0'\n";
