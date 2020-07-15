@@ -83,6 +83,32 @@ Deno.test('a nested sequence', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
+Deno.test('a deeply nested sequence', () => {
+  const input = [
+    {
+      a: [
+        {
+          b: [
+            {
+              c: [
+                {
+                  d: [
+                    {
+                      e: 'f'
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      g: ['h', 'i', 'j']
+    }
+  ];
+  const expected = "- a:\n    - b:\n        - c:\n            - d:\n                - e: f\n  g:\n    - h\n    - i\n    - j\n";
+  assertEquals(json2yaml(JSON.stringify(input)), expected);
+});
 
 Deno.test('a complicated nested sequence', () => {
   const input = [
