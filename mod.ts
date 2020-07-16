@@ -1,10 +1,10 @@
 /*
  * Types
  */
-type stringConverter = (el: any, indentLevel?: number, numSpaces?: number) => string;
+type typeHandler = (el: any, indentLevel?: number, numSpaces?: number) => string;
 
 interface IHandlerMap {
-  [key: string]: stringConverter;
+  [key: string]: typeHandler;
 }
 
 /*
@@ -18,13 +18,16 @@ function isSpecialString(s: string): boolean {
   return (
     s === 'true'
     || s === 'false'
+    || s === '~'
     || s === 'null'
     || s === 'undefined'
     || !isNaN(+s)
-    || s.includes('#')
-    || s.includes('\n')
-    || (s.startsWith('{') && s.endsWith('}'))
-    || (s.startsWith('[') && s.endsWith(']'))
+    || !isNaN(Date.parse(s))
+    || s.startsWith('-')
+    || s.startsWith('{')
+    || s.startsWith('[')
+    || /[:,&*#?|<>=!%@`]/.test(s)
+    || JSON.stringify(s) != `"${s}"`
   );
 }
 
@@ -85,7 +88,7 @@ function booleanHandler(b: boolean): string {
 }
 
 function stringHandler(s: string): string {
-  return isSpecialString(s) ? `'${s}'` : s;
+  return isSpecialString(s) ? JSON.stringify(s) : s;
 }
 
 function functionHandler(): string {
@@ -99,7 +102,7 @@ function arrayHandler(a: any[], indentLevel: number = 0, numSpaces: number = 2):
 
   return a.reduce((output: string, el: any): string => {
     const type: string = typeOf(el);
-    const handler: stringConverter = handlers[type];
+    const handler: typeHandler = handlers[type];
     if (handler === undefined) {
       throw new Error(`Encountered unknown type: ${type}`);
     }
@@ -118,13 +121,13 @@ function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2
     // @ts-ignore: TS7053
     const val: any = o[k];
     const type: string = typeOf(val);
-    const handler: stringConverter = handlers[type];
+    const handler: typeHandler = handlers[type];
     if (handler === undefined) {
       throw new Error(`Encountered unknown type: ${type}`);
     }
 
     const leadingSpaces: string = ' '.repeat(indentLevel * numSpaces);
-    const keyString = isSpecialString(k) ? `'${k}'` : k;
+    const keyString = stringHandler(k);
     return `${output}\n${leadingSpaces}${keyString}: ${handler(val, indentLevel + 1, numSpaces)}`;
   }, '');
 }
