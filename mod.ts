@@ -22,6 +22,7 @@ function isSpecialString(s: string): boolean {
     || s === 'undefined'
     || !isNaN(+s)
     || s.includes('#')
+    || s.includes('\n')
     || (s.startsWith('{') && s.endsWith('}'))
     || (s.startsWith('[') && s.endsWith(']'))
   );

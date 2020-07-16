@@ -49,6 +49,14 @@ Deno.test('ambiguous strings', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
+Deno.test('string with newlines', () => {
+  const input = {
+    a: 'b\nc\nd\ne'
+  };
+  const expected = "a: 'b\nc\nd\ne'\n";
+  assertEquals(json2yaml(JSON.stringify(input)), expected);
+});
+
 Deno.test('a simple mixed object', () => {
   const input = {
     a: [
