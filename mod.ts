@@ -9,10 +9,10 @@ interface IHandlerMap {
 
 /*
  * Checks if the input string is a special string.
-
- * This is separated out of stringHandler() because both normal values and keys
- * of objects need to know whether the string is special, but may handle it in a
- * different way.
+ *
+ * This is separated from stringHandler() because both normal values and keys
+ * of objects need to know whether the string is special, but may handle it in
+ * different ways.
  */
 function isSpecialString(s: string): boolean {
   return (
@@ -100,7 +100,7 @@ function arrayHandler(a: any[], indentLevel: number = 0, numSpaces: number = 2):
     const type: string = typeOf(el);
     const handler: stringConverter = handlers[type];
     if (handler === undefined) {
-      throw new Error(`encountered unknown type: ${type}`);
+      throw new Error(`Encountered unknown type: ${type}`);
     }
 
     const leadingSpaces: string = ' '.repeat(indentLevel * numSpaces);
@@ -119,7 +119,7 @@ function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2
     const type: string = typeOf(val);
     const handler: stringConverter = handlers[type];
     if (handler === undefined) {
-      throw new Error(`encountered unknown type: ${type}`);
+      throw new Error(`Encountered unknown type: ${type}`);
     }
 
     const leadingSpaces: string = ' '.repeat(indentLevel * numSpaces);

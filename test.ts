@@ -1,5 +1,5 @@
 import { assertEquals } from 'https://deno.land/std@0.60.0/testing/asserts.ts';
-import { json2yaml } from './mod.ts'
+import { json2yaml } from './mod.ts';
 
 Deno.test('a number', () => {
   const input = 2;
@@ -13,7 +13,7 @@ Deno.test('a string', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
-Deno.test('a null', () => {
+Deno.test('null', () => {
   const input = null;
   const expected = 'null\n';
   assertEquals(json2yaml(JSON.stringify(input)), expected);
