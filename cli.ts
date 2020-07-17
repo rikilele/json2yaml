@@ -14,7 +14,7 @@ function printHelp(): void {
   console.log('Bugs: https://github.com/Rikilele/json2yaml/issues');
   console.log();
   console.log('USAGE:');
-  console.log('    deno run --allow-read https://deno.land/x/json2yaml/cli.ts [OPTIONS] [-- FILE]');
+  console.log('    deno run --allow-read https://deno.land/x/json2yaml/cli.ts [OPTIONS] -- FILE');
   console.log();
   console.log('OPTIONS:');
   console.log('    -h, --help           Print help information');
