@@ -6,6 +6,8 @@ A Deno module that converts a JSON string to a (pretty) YAML string 🦕
 
 ## Module
 
+Basic usage:
+
 ```js
 import { json2yaml } from 'https://deno.land/x/json2yaml/mod.ts';
 
@@ -19,8 +21,23 @@ Output:
 
 ```yaml
 hello: world
+```
 
-# Notice the newline at the end
+You can also specify the number of spaces to use for indents:
+
+```js
+const jsonString = '{"foo": ["bar", "baz"]}';
+const yamlString = json2yaml(jsonString, 3);
+
+console.log(yamlString);
+```
+
+Output:
+
+```yaml
+foo:
+   -  bar
+   -  baz
 ```
 
 ## CLI
@@ -29,7 +46,7 @@ hello: world
 # Prints output to stdout
 deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json
 
-# Save contents into output.yaml
+# Write contents into output.yaml
 deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > output.yaml
 ```
 
