@@ -8,7 +8,7 @@ function printVersion(): void {
 
 function printHelp(): void {
   printVersion();
-  console.log('Converts a JSON string to a (pretty) YAML string');
+  console.log('Converts a JSON string to a (pretty) YAML string 🦕');
   console.log();
   console.log('Docs: https://deno.land/x/json2yaml');
   console.log('Bugs: https://github.com/Rikilele/json2yaml/issues');
