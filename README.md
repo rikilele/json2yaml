@@ -48,21 +48,21 @@ foo:
 For more documentation, run:
 
 ```sh
-deno doc mod.ts
+$ deno doc mod.ts
 ```
 
 ## CLI
 
 ```sh
 # Prints output to stdout
-deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json
+$ deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json
 
 # Write contents into output.yaml
-deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > output.yaml
+$ deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > output.yaml
 ```
 
 ## Testing
 
 ```sh
-deno test --allow-read
+$ deno test --allow-read
 ```
