@@ -141,8 +141,8 @@ function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2
  * The function will throw an error when the input string is an invalid JSON,
  * or an invalid argument is supplied.
  *
- * @param s The JSON string to convert to yaml
- * @param numSpaces The number of spaces to use for indents. Has to be > 1
+ * @param s The JSON string to convert to YAML
+ * @param numSpaces The number of spaces to use for indents. Must be > 1
  */
 export function json2yaml(s: string, numSpaces: number = 2): string {
   if (numSpaces < 2) {

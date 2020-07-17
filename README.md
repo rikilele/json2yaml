@@ -40,6 +40,12 @@ foo:
    -  baz
 ```
 
+For more documentation, run:
+
+```sh
+deno doc mod.ts
+```
+
 ## CLI
 
 ```sh
@@ -53,5 +59,5 @@ deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > outpu
 ## Testing
 
 ```sh
-deno test
+deno test --allow-read
 ```
