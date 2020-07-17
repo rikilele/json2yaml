@@ -1,8 +1,9 @@
 import { parse } from 'https://deno.land/std@0.61.0/flags/mod.ts';
 import { json2yaml } from './mod.ts';
+import { VERSION } from './version.ts';
 
 function printVersion(): void {
-  console.log('json2yaml 0.1.0');
+  console.log(`json2yaml ${VERSION}`);
 }
 
 function printHelp(): void {
