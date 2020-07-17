@@ -91,6 +91,21 @@ Deno.test('a nested sequence', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
+Deno.test('a nested sequence with numSpaces = 3', () => {
+  const input = [
+    {
+      a: [
+        'b'
+      ],
+      c: [
+        'd'
+      ]
+    }
+  ];
+  const expected = "-  a:\n      -  b\n   c:\n      -  d\n";
+  assertEquals(json2yaml(JSON.stringify(input), 3), expected);
+});
+
 Deno.test('a deeply nested sequence', () => {
   const input = [
     {

@@ -107,8 +107,9 @@ function arrayHandler(a: any[], indentLevel: number = 0, numSpaces: number = 2):
       throw new Error(`Encountered unknown type: ${type}`);
     }
 
-    const leadingSpaces: string = ' '.repeat(indentLevel * numSpaces);
-    return `${output}\n${leadingSpaces}- ${handler(el, indentLevel + 1, numSpaces).trimLeft()}`;
+    const indent: string = ' '.repeat(indentLevel * numSpaces);
+    const gap: string = ' '.repeat(numSpaces - 1);
+    return `${output}\n${indent}-${gap}${handler(el, indentLevel + 1, numSpaces).trimLeft()}`;
   }, '');
 }
 
@@ -126,20 +127,25 @@ function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2
       throw new Error(`Encountered unknown type: ${type}`);
     }
 
-    const leadingSpaces: string = ' '.repeat(indentLevel * numSpaces);
+    const indent: string = ' '.repeat(indentLevel * numSpaces);
     const keyString = stringHandler(k);
-    return `${output}\n${leadingSpaces}${keyString}: ${handler(val, indentLevel + 1, numSpaces)}`;
+    return `${output}\n${indent}${keyString}: ${handler(val, indentLevel + 1, numSpaces)}`;
   }, '');
 }
 
 /**
  * Converts a valid JSON string to a YAML string (trailing newline included).
- * The function will throw an error when the input string is an invalid JSON.
+ * The function will throw an error when the input string is an invalid JSON,
+ * or an invalid argument is supplied.
  *
  * @param s The JSON string to convert to yaml
- * @param numSpaces The number of spaces to use for indents
+ * @param numSpaces The number of spaces to use for indents. Has to be > 1
  */
 export function json2yaml(s: string, numSpaces: number = 2): string {
+  if (numSpaces < 2) {
+    throw new Error('Invalid argument: numSpaces has to be > 1');
+  }
+
   const o: object | any[] = JSON.parse(s);
   const yaml = handlers[typeOf(o)](o, 0, numSpaces);
   return removeTrailingSpaces(yaml).trimLeft().concat('\n');

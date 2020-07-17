@@ -18,7 +18,7 @@ function printHelp(): void {
   console.log('OPTIONS:');
   console.log('    -h, --help           Print help information');
   console.log('    -v, --version        Print version information');
-  console.log('    -s, --spaces <n>     Set number of spaces used for indents');
+  console.log('    -s, --spaces <n>     Set number of spaces > 1 used for indents');
   console.log();
   console.log('FILE:');
   console.log('    A path to a file containing a valid JSON string');
@@ -64,7 +64,7 @@ function cli() {
   }
 
   const filePath = parsedArgs['--'][0];
-  const numSpaces = isNaN(parsedArgs.s) || parsedArgs.s < 0 ? 2 : parsedArgs.s;
+  const numSpaces = isNaN(parsedArgs.s) || parsedArgs.s < 2 ? 2 : parsedArgs.s;
   executeConversion(filePath, numSpaces);
 }
 
