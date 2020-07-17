@@ -1,0 +1,17 @@
+hello: world
+foo:
+  - "bar\n"
+  - baz
+  - this: "~"
+    is: "cool#"
+  - null
+e400: "400"
+"\nhello": ""
+"\"": riki
+"{": "}"
+date: time
+nested:
+  - " a":
+      - b
+    " c":
+      - d
