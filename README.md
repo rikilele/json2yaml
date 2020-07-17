@@ -26,7 +26,11 @@ hello: world
 ## CLI
 
 ```sh
+# Prints output to stdout
 deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json
+
+# Save contents into output.yaml
+deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > output.yaml
 ```
 
 ## Testing
