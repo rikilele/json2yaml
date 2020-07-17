@@ -1,11 +1,6 @@
 import { parse } from 'https://deno.land/std@0.61.0/flags/mod.ts';
 import { json2yaml } from './mod.ts';
 
-function printUsage(): void {
-  console.log('USAGE:');
-  console.log('    deno run --allow-read https://deno.land/x/json2yaml/cli.ts [OPTIONS] -- [FILE]');
-}
-
 function printVersion(): void {
   console.log('json2yaml 0.1.0');
 }
@@ -17,7 +12,8 @@ function printHelp(): void {
   console.log('Docs: https://deno.land/x/json2yaml');
   console.log('Bugs: https://github.com/Rikilele/json2yaml/issues');
   console.log();
-  printUsage();
+  console.log('USAGE:');
+  console.log('    deno run --allow-read https://deno.land/x/json2yaml/cli.ts [OPTIONS] [-- FILE]');
   console.log();
   console.log('OPTIONS:');
   console.log('    -h, --help           Print help information');
@@ -63,7 +59,7 @@ function cli() {
   }
 
   if (parsedArgs['--'].length === 0) {
-    printUsage();
+    printHelp();
     Deno.exit(0);
   }
 
