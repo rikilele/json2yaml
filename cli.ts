@@ -29,7 +29,10 @@ function executeConversion(filePath: string, numSpaces: number) {
     const decoder = new TextDecoder('utf-8');
     const fileContents = Deno.readFileSync(filePath);
     const jsonString = decoder.decode(fileContents);
-    console.log(json2yaml(jsonString, numSpaces));
+    const yamlString = json2yaml(jsonString, numSpaces);
+    const encoder = new TextEncoder();
+    const outputContent = encoder.encode(yamlString);
+    Deno.stdout.writeSync(outputContent);
     Deno.exit(0);
   } catch (e) {
     console.log(`Failed to convert file ${filePath}`);
