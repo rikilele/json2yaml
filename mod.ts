@@ -21,11 +21,14 @@ function isSpecialString(s: string): boolean {
     || s === '~'
     || s === 'null'
     || s === 'undefined'
+    || s === '}'
+    || s === ']'
     || !isNaN(+s)
     || !isNaN(Date.parse(s))
     || s.startsWith('-')
     || s.startsWith('{')
     || s.startsWith('[')
+    || /^\s/.test(s)
     || /[:,&*#?|<>=!%@`]/.test(s)
     || JSON.stringify(s) != `"${s}"`
   );
