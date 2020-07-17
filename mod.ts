@@ -1,13 +1,14 @@
-/*
+/**
  * Types
  */
+// deno-lint-ignore no-explicit-any
 type typeHandler = (el: any, indentLevel?: number, numSpaces?: number) => string;
 
 interface IHandlerMap {
   [key: string]: typeHandler;
 }
 
-/*
+/**
  * Checks if the input string is a special string.
  *
  * This is separated from stringHandler() because both normal values and keys
@@ -34,7 +35,7 @@ function isSpecialString(s: string): boolean {
   );
 }
 
-/*
+/**
  * Removes the trailing white spaces and line terminator characters from each
  * line of a string.
  */
@@ -42,11 +43,12 @@ function removeTrailingSpaces(input: string): string {
   return input.split('\n').map((s: string) => s.trimRight()).join('\n');
 }
 
-/*
+/**
  * Why?
  * The JavaScript typeof operator is uninformative e.g. typeof [] === 'object'.
  * Therefore, we declare our own typeOf function.
  */
+// deno-lint-ignore no-explicit-any
 function typeOf(x: any): string {
   if (x === null) return 'null';
   if (x === undefined) return 'undefined';
@@ -98,11 +100,13 @@ function functionHandler(): string {
   return '[object Function]';
 }
 
-function arrayHandler(a: any[], indentLevel: number = 0, numSpaces: number = 2): string {
+// deno-lint-ignore no-explicit-any
+function arrayHandler(a: any[], indentLevel = 0, numSpaces = 2): string {
   if (a.length === 0) {
     return '[]';
   }
 
+  // deno-lint-ignore no-explicit-any
   return a.reduce((output: string, el: any): string => {
     const type: string = typeOf(el);
     const handler: typeHandler = handlers[type];
@@ -116,13 +120,14 @@ function arrayHandler(a: any[], indentLevel: number = 0, numSpaces: number = 2):
   }, '');
 }
 
-function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2): string {
+function objectHandler(o: object, indentLevel = 0, numSpaces = 2): string {
   if (Object.keys(o).length === 0) {
     return '{}';
   }
 
   return Object.keys(o).reduce((output: string, k: string, i: number): string => {
     // @ts-ignore: TS7053
+    // deno-lint-ignore no-explicit-any
     const val: any = o[k];
     const type: string = typeOf(val);
     const handler: typeHandler = handlers[type];
@@ -144,11 +149,12 @@ function objectHandler(o: object, indentLevel: number = 0, numSpaces: number = 2
  * @param s The JSON string to convert to YAML
  * @param numSpaces The number of spaces to use for indents. Must be > 1
  */
-export function json2yaml(s: string, numSpaces: number = 2): string {
+export function json2yaml(s: string, numSpaces = 2): string {
   if (numSpaces < 2) {
     throw new Error('Invalid argument: numSpaces has to be > 1');
   }
 
+  // deno-lint-ignore no-explicit-any
   const o: object | any[] = JSON.parse(s);
   const yaml = handlers[typeOf(o)](o, 0, numSpaces);
   return removeTrailingSpaces(yaml).trimLeft().concat('\n');
