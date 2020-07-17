@@ -2,13 +2,12 @@
 
 A Deno module that converts a JSON string to a (pretty) YAML string 🦕
 
-> *Inspired by https://github.com/alexcrist/json-to-pretty-yaml*
+*Inspired by https://github.com/alexcrist/json-to-pretty-yaml*
 
-Note:
-There already exists a module to convert JavaScript objects to YAML strings in
-the Deno standard library [`stringify()`](https://deno.land/std/encoding/#yaml).
-Consider using this instead of json2yaml if you prefer working with JavaScript
-objects!
+> **Note**: there already exists a module
+> ([`stringify()`](https://deno.land/std/encoding/#yaml))
+> to convert JavaScript objects to YAML strings in the Deno standard library.
+> Consider using this instead if you prefer working with JavaScript objects!
 
 ## Module
 
