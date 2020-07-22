@@ -10,6 +10,12 @@ Deno.test('a number', () => {
   assertEquals(json2yaml(JSON.stringify(input)), expected);
 });
 
+Deno.test('a boolean', () => {
+  const input = true;
+  const expected = 'true\n';
+  assertEquals(json2yaml(JSON.stringify(input)), expected);
+});
+
 Deno.test('a string', () => {
   const input = 'hello';
   const expected = 'hello\n';
