@@ -3,6 +3,7 @@
 A Deno module that converts a JSON string to a (pretty) YAML string 🦕
 
 ![ci](https://github.com/Rikilele/json2yaml/workflows/CI/badge.svg)
+[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/json2yaml)
 
 *Inspired by https://github.com/alexcrist/json-to-pretty-yaml*
 

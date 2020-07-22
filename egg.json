@@ -1,0 +1,13 @@
+{
+  "name": "json2yaml",
+  "description": "Converts a JSON string to a (pretty) YAML string 🦕",
+  "version": "1.0.0",
+  "stable": true,
+  "repository": "https://github.com/Rikilele/json2yaml",
+  "files": [
+    "./cli.ts",
+    "./mod.ts",
+    "./README.md",
+    "./version.ts"
+  ]
+}
