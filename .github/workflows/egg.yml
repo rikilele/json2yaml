@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: denolib/setup-deno@2.0.0
+      - uses: denolib/setup-deno@v2.0.0
         with:
           deno-version: 1.x
       - run: deno install -A -f --unstable -n eggs https://x.nest.land/eggs@0.1.10/mod.ts
