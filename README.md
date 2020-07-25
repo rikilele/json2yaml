@@ -64,6 +64,20 @@ $ deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json
 $ deno run --allow-read https://deno.land/x/json2yaml/cli.ts -- input.json > output.yaml
 ```
 
+You can also use `deno install` to easily create an alias command:
+
+```sh
+$ deno install -f --allow-read -n json2yaml https://deno.land/x/json2yaml/cli.ts
+
+# Much shorter!
+$ json2yaml -- input.json
+```
+
+Explanation:
+  - `-f`: Forcefully overrides previous installations of json2yaml
+  - `--allow-read`: Grants read access to the cli
+  - `-n json2yaml`: Sets the alias to json2yaml
+
 ## Testing
 
 ```sh
