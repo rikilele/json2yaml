@@ -1,4 +1,4 @@
-import { parse } from 'https://deno.land/std@0.61.0/flags/mod.ts';
+import { parse } from 'https://deno.land/std@0.62.0/flags/mod.ts';
 import { json2yaml } from './mod.ts';
 import { VERSION } from './version.ts';
 
