@@ -2,7 +2,11 @@
  * Types
  */
 // deno-lint-ignore no-explicit-any
-type typeHandler = (el: any, indentLevel?: number, numSpaces?: number) => string;
+type typeHandler = (
+  el: any,
+  indentLevel?: number,
+  numSpaces?: number,
+) => string;
 
 interface IHandlerMap {
   [key: string]: typeHandler;
@@ -17,21 +21,21 @@ interface IHandlerMap {
  */
 function isSpecialString(s: string): boolean {
   return (
-    s === 'true'
-    || s === 'false'
-    || s === '~'
-    || s === 'null'
-    || s === 'undefined'
-    || s === '}'
-    || s === ']'
-    || !isNaN(+s)
-    || !isNaN(Date.parse(s))
-    || s.startsWith('-')
-    || s.startsWith('{')
-    || s.startsWith('[')
-    || /^\s/.test(s)
-    || /[:,&*#?|<>=!%@`]/.test(s)
-    || JSON.stringify(s) != `"${s}"`
+    s === "true" ||
+    s === "false" ||
+    s === "~" ||
+    s === "null" ||
+    s === "undefined" ||
+    s === "}" ||
+    s === "]" ||
+    !isNaN(+s) ||
+    !isNaN(Date.parse(s)) ||
+    s.startsWith("-") ||
+    s.startsWith("{") ||
+    s.startsWith("[") ||
+    /^\s/.test(s) ||
+    /[:,&*#?|<>=!%@`]/.test(s) ||
+    JSON.stringify(s) != `"${s}"`
   );
 }
 
@@ -40,7 +44,7 @@ function isSpecialString(s: string): boolean {
  * line of a string.
  */
 function removeTrailingSpaces(input: string): string {
-  return input.split('\n').map((s: string) => s.trimRight()).join('\n');
+  return input.split("\n").map((s: string) => s.trimRight()).join("\n");
 }
 
 /**
@@ -50,38 +54,47 @@ function removeTrailingSpaces(input: string): string {
  */
 // deno-lint-ignore no-explicit-any
 function typeOf(x: any): string {
-  if (x === null) return 'null';
-  if (x === undefined) return 'undefined';
+  if (x === null) return "null";
+  if (x === undefined) return "undefined";
   switch (Object.prototype.toString.call(x)) {
-    case '[object Array]': return 'array';
-    case '[object Boolean]': return 'boolean';
-    case '[object Date]': return 'date';
-    case '[object Function]': return 'function';
-    case '[object Number]': return 'number';
-    case '[object Object]': return 'object';
-    case '[object RegExp]': return 'regexp';
-    case '[object String]': return 'string';
-    default: return 'object';
+    case "[object Array]":
+      return "array";
+    case "[object Boolean]":
+      return "boolean";
+    case "[object Date]":
+      return "date";
+    case "[object Function]":
+      return "function";
+    case "[object Number]":
+      return "number";
+    case "[object Object]":
+      return "object";
+    case "[object RegExp]":
+      return "regexp";
+    case "[object String]":
+      return "string";
+    default:
+      return "object";
   }
 }
 
 const handlers: IHandlerMap = {
-  'undefined': undefinedHandler,
-  'null': nullHandler,
-  'number': numberHandler,
-  'boolean': booleanHandler,
-  'string': stringHandler,
-  'function': functionHandler,
-  'array': arrayHandler,
-  'object': objectHandler,
+  "undefined": undefinedHandler,
+  "null": nullHandler,
+  "number": numberHandler,
+  "boolean": booleanHandler,
+  "string": stringHandler,
+  "function": functionHandler,
+  "array": arrayHandler,
+  "object": objectHandler,
 };
 
 function undefinedHandler(): string {
-  return 'null';
+  return "null";
 }
 
 function nullHandler(): string {
-  return 'null';
+  return "null";
 }
 
 function numberHandler(n: number): string {
@@ -97,13 +110,13 @@ function stringHandler(s: string): string {
 }
 
 function functionHandler(): string {
-  return '[object Function]';
+  return "[object Function]";
 }
 
 // deno-lint-ignore no-explicit-any
 function arrayHandler(a: any[], indentLevel = 0, numSpaces = 2): string {
   if (a.length === 0) {
-    return '[]';
+    return "[]";
   }
 
   // deno-lint-ignore no-explicit-any
@@ -114,31 +127,38 @@ function arrayHandler(a: any[], indentLevel = 0, numSpaces = 2): string {
       throw new Error(`Encountered unknown type: ${type}`);
     }
 
-    const indent: string = ' '.repeat(indentLevel * numSpaces);
-    const gap: string = ' '.repeat(numSpaces - 1);
-    return `${output}\n${indent}-${gap}${handler(el, indentLevel + 1, numSpaces).trimLeft()}`;
-  }, '');
+    const indent: string = " ".repeat(indentLevel * numSpaces);
+    const gap: string = " ".repeat(numSpaces - 1);
+    return `${output}\n${indent}-${gap}${
+      handler(el, indentLevel + 1, numSpaces).trimLeft()
+    }`;
+  }, "");
 }
 
 function objectHandler(o: object, indentLevel = 0, numSpaces = 2): string {
   if (Object.keys(o).length === 0) {
-    return '{}';
+    return "{}";
   }
 
-  return Object.keys(o).reduce((output: string, k: string, i: number): string => {
-    // @ts-ignore: TS7053
-    // deno-lint-ignore no-explicit-any
-    const val: any = o[k];
-    const type: string = typeOf(val);
-    const handler: typeHandler = handlers[type];
-    if (handler === undefined) {
-      throw new Error(`Encountered unknown type: ${type}`);
-    }
+  return Object.keys(o).reduce(
+    (output: string, k: string, i: number): string => {
+      // @ts-ignore: TS7053
+      // deno-lint-ignore no-explicit-any
+      const val: any = o[k];
+      const type: string = typeOf(val);
+      const handler: typeHandler = handlers[type];
+      if (handler === undefined) {
+        throw new Error(`Encountered unknown type: ${type}`);
+      }
 
-    const indent: string = ' '.repeat(indentLevel * numSpaces);
-    const keyString = stringHandler(k);
-    return `${output}\n${indent}${keyString}: ${handler(val, indentLevel + 1, numSpaces)}`;
-  }, '');
+      const indent: string = " ".repeat(indentLevel * numSpaces);
+      const keyString = stringHandler(k);
+      return `${output}\n${indent}${keyString}: ${
+        handler(val, indentLevel + 1, numSpaces)
+      }`;
+    },
+    "",
+  );
 }
 
 /**
@@ -151,11 +171,11 @@ function objectHandler(o: object, indentLevel = 0, numSpaces = 2): string {
  */
 export function json2yaml(s: string, numSpaces = 2): string {
   if (numSpaces < 2) {
-    throw new Error('Invalid argument: numSpaces has to be > 1');
+    throw new Error("Invalid argument: numSpaces has to be > 1");
   }
 
   // deno-lint-ignore no-explicit-any
   const o: object | any[] = JSON.parse(s);
   const yaml = handlers[typeOf(o)](o, 0, numSpaces);
-  return removeTrailingSpaces(yaml).trimLeft().concat('\n');
+  return removeTrailingSpaces(yaml).trimLeft().concat("\n");
 }

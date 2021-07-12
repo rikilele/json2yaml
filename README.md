@@ -5,19 +5,19 @@ A Deno module that converts a JSON string to a (pretty) YAML string 🦕
 ![ci](https://github.com/Rikilele/json2yaml/workflows/CI/badge.svg)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/json2yaml)
 
-*Inspired by https://github.com/alexcrist/json-to-pretty-yaml*
+_Inspired by https://github.com/alexcrist/json-to-pretty-yaml_
 
 > **Note**: there already exists a module
-> ([`stringify()`](https://deno.land/std/encoding/#yaml))
-> to convert JavaScript objects to YAML strings in the Deno standard library.
-> Consider using this instead if you prefer working with JavaScript objects!
+> ([`stringify()`](https://deno.land/std/encoding/#yaml)) to convert JavaScript
+> objects to YAML strings in the Deno standard library. Consider using this
+> instead if you prefer working with JavaScript objects!
 
 ## Module
 
 Basic usage:
 
 ```js
-import { json2yaml } from 'https://deno.land/x/json2yaml/mod.ts';
+import { json2yaml } from "https://deno.land/x/json2yaml/mod.ts";
 
 const jsonString = '{"hello": "world"}';
 const yamlString = json2yaml(jsonString);
@@ -74,9 +74,10 @@ $ json2yaml -- input.json
 ```
 
 Explanation:
-  - `-f`: Forcefully overrides previous installations of json2yaml
-  - `--allow-read`: Grants read access to the cli
-  - `-n json2yaml`: Sets the alias to json2yaml
+
+- `-f`: Forcefully overrides previous installations of json2yaml
+- `--allow-read`: Grants read access to the cli
+- `-n json2yaml`: Sets the alias to json2yaml
 
 ## Testing
 
