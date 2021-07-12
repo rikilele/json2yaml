@@ -21,9 +21,9 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
+
     - name: Setup Deno environment
-      uses: denolib/setup-deno@v2.0.0
+      uses: denoland/setup-deno@4a4e59637fa62bd6c086a216c7e4c5b457ea9e79
       with:
         # Version range or exact version of a Deno version to use.
         deno-version: 1.x
