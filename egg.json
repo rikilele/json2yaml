@@ -1,7 +1,7 @@
 {
   "name": "json2yaml",
   "description": "Converts a JSON string to a (pretty) YAML string 🦕",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "stable": true,
   "repository": "https://github.com/Rikilele/json2yaml",
   "files": [
