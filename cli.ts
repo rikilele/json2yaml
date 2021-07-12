@@ -1,4 +1,4 @@
-import { parse } from 'https://deno.land/std@0.62.0/flags/mod.ts';
+import { parse } from 'https://deno.land/std@0.100.0/flags/mod.ts';
 import { json2yaml } from './mod.ts';
 import { VERSION } from './version.ts';
 
@@ -11,7 +11,7 @@ function printHelp(): void {
   console.log('Converts a JSON string to a (pretty) YAML string 🦕');
   console.log();
   console.log('Docs: https://deno.land/x/json2yaml');
-  console.log('Bugs: https://github.com/Rikilele/json2yaml/issues');
+  console.log('Bugs: https://github.com/rikilele/json2yaml/issues');
   console.log();
   console.log('USAGE:');
   console.log('    deno run --allow-read https://deno.land/x/json2yaml/cli.ts [OPTIONS] -- FILE');
